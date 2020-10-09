@@ -11,8 +11,10 @@
  
   <p v-on:mousemove="atualizarXY">
     Mouse: {{ x }} e {{ y }}
-    
+    <span v-on:mousemove="parar">PARAR AQUI!!! </span>
+    <span v-on:mousemove.stop="">STOP</span>
   </p>
+  <a v-on:click.prevent="" href="https://www.google.com">Google.com</a>
 </div>
 
 <script>
@@ -32,7 +34,9 @@
             this.x = e.clientX
             this.y = e.clientY
           },
-         
+          parar(e) {
+            e.stopPropagation();            
+          }
         }     
     })
 </script>
