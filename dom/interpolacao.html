@@ -3,16 +3,12 @@
 <div id="app"> 
 
   <p>
-    {{ 1 + 2 -100 * 2}}
-  </p>
-
-  <p>
     {{contador * 2}}
   </p>
   <p>
-    {{ contador > 10 ? 'Maior do que 10' : 'Menor do que 10'}}
+    {{contador > 10 ? 'Maior do que 10' : 'Menor do que 10'}}
   </p>
-  <button v-on:click="somar(5, $event)">
+  <button v-on:click="somar">
     Somar 1
   </button> 
 
@@ -25,7 +21,7 @@
           contador: 0,             
         },   
         methods: {   
-          somar(p) {           
+          somar() {           
             this.contador ++
           },        
         
