@@ -3,25 +3,105 @@
   <div class="players">
     <div>
       <h2>Jogador</h2>
-      <div class="progreebar">--</div>
+      <div class="progreebar">
+        <span style="width: 20%"></span>
+      </div>
       <div class="percentage">100%</div>
     </div>
     <div>
-      <h2>Jogador</h2>
-      <div class="progreebar">--</div>
+      <h2>Monstro</h2>
+      <div class="progreebar">
+        <span></span>
+      </div>
       <div class="percentage">100%</div>
     </div>
   </div>
 
   <div class="actions">
-    <button>Ataque</button>
-    <button>Ataque especial</button>
-    <button>Curar</button>
+    <button class="ataque">Ataque</button>
+    <button class="especial">Ataque especial</button>
+    <button class="curar">Curar</button>
     <button>Desistir</button>
   </div>
 
   <div class="feedback">
-    <div>jogador ganhou 1 ponto</div>
+    <div class="red">Jogador atingiu monstro com 6.</div>
+    <div class="purple">Monstro atingiu jogador com 6.</div>
   </div>
 </div>
 <script src="app.js"></script>
+
+<style >
+  body {
+    font-family: Tahoma;
+    text-align: center;
+  }
+   .players, .actions, .feedback {
+     display: flex;    
+     flex-direction: row;
+     margin-top: 20px;
+    justify-content: center;
+   }
+   .players > div {
+      width: 50%;
+      margin: 0 5px;      
+    }
+
+    .players .progreebar {
+     width: 100%;
+     height: 20px;
+     background: #ddd;
+     text-align: left;
+    }
+    .players .progreebar span{
+     display: inline-block;
+     height: 20px;
+     background: green;
+    }
+
+    .actions button {
+      margin: 0 5px;  
+      border: 0;
+      height: 30px; 
+      display: inline-block;
+      background: #ddd;   
+      padding: 0 10px;
+      cursor: pointer;
+      opacity: 0.8; 
+    }
+    .actions button.ataque {
+      background: tomato;
+      color: #fff;
+    }
+    .actions button.especial {
+      background: orange;
+    }
+    .actions button.curar {
+      background: green;
+      color: #fff;
+    }
+    .actions button:hover { 
+      opacity: 1; 
+    }
+
+    .feedback {   
+     flex-direction: column;    
+     margin-top: 40px; 
+     padding: 0 200px;
+    }
+
+    .feedback div {
+      height: 30px;
+      line-height: 30px;
+      background: #ddd;
+      margin-bottom: 10px;
+      color: #fff;
+    }
+    .feedback .purple {
+      background: purple;
+    }
+    .feedback .red {
+      background:red;
+    }
+   
+  </style>
