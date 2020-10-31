@@ -17,11 +17,15 @@
     </div>
   </div>
 
-  <div class="actions">
+  <div class="start" v-if="!started">
+    <button class="start" @click="init()">Iniciar o jogo</button>  
+  </div>
+
+  <div class="actions" v-else>
     <button class="ataque">Ataque</button>
     <button class="especial">Ataque especial</button>
     <button class="curar">Curar</button>
-    <button>Desistir</button>
+    <button @click="finish()">Desistir</button>
   </div>
 
   <div class="feedback">
@@ -59,7 +63,7 @@
      background: green;
     }
 
-    .actions button {
+    button {
       margin: 0 5px;  
       border: 0;
       height: 30px; 
@@ -69,18 +73,24 @@
       cursor: pointer;
       opacity: 0.8; 
     }
-    .actions button.ataque {
+    button.start {
+      background: blue;
+      color: #fff;
+      width: 330px;
+      height: 40px;
+    }
+    button.ataque {
       background: tomato;
       color: #fff;
     }
-    .actions button.especial {
+    button.especial {
       background: orange;
     }
-    .actions button.curar {
+    button.curar {
       background: green;
       color: #fff;
     }
-    .actions button:hover { 
+    button:hover { 
       opacity: 1; 
     }
 
