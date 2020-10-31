@@ -13,7 +13,7 @@ new Vue({
 			this.started = false;
 		},
 		attack() {
-			const calc = ()=> (Math.random() * 10).toFixed(2);
+			const calc = ()=> Math.floor((Math.random() * 20));
 			const subPlayer =  (this.playerPercent > 0) ? this.playerPercent -= calc() : 0;
 			const subMonster =   ( this.monsterPercent > 0) ? this.monsterPercent -= calc() : 0;
 
