@@ -19,26 +19,42 @@ new Vue({
 		},
 		attack() {
 			const calc = ()=> Math.floor((Math.random() * 20));	
+			console.log('calc ', calc())
 			const subPlayer =  this.playerPercent -= calc();
 			const subMonster =  this.monsterPercent -= calc();
-			
-			if (subMonster < subPlayer) {
-				console.log('playerA ', subPlayer );
-				console.log('playerB ', subMonster );
-				calc();
+
+			const aP = calc();
+			const aM = calc();
+
+			if(aP> aM) {
+				this.playerPercent -= aP
+				this.monsterPercent -= aM
 			} else {
-				(subPlayer >= 0) ?  this.playerPercent = subPlayer :  this.playerPercent = 0;
-				(subMonster >= 0) ?  this.monsterPercent = subMonster :  this.monsterPercent = 0;
-			}	
+				this.playerPercent -= aM
+				this.monsterPercent -= aP
+			}
+
+
+			// if (subMonster < subPlayer) {
+			// 	console.log('playerA ', subPlayer );
+			// 	console.log('playerB ', subMonster );
+			// 	calc();
+			// } else {
+			// 	(subPlayer >= 0) ?  this.playerPercent = subPlayer :  this.playerPercent = 0;
+			// 	(subMonster >= 0) ?  this.monsterPercent = subMonster :  this.monsterPercent = 0;
+			// }	
 			
+		},
+		menor(progrees) {
+			return progrees <= 20;
 		}
 	},
 	computed: {
 		computedPlayerPercent() {
-			return `${this.playerPercent}%`
+			return `${this.playerPercent}`
 		},
 		computedMonsterPercent() {
-			return `${this.monsterPercent}%`
-		}
+			return `${this.monsterPercent}`
+		},		
 	}
 })

@@ -3,17 +3,17 @@
   <div class="players">
     <div>
       <h2>Jogador</h2>
-      <div class="progreebar">
-        <span :style="{width: computedPlayerPercent}"></span>
+      <div class="progreesbar">
+        <span :class='{"critical" : menor(computedPlayerPercent) }' :style="{width:  ( computedPlayerPercent >= 0) ?  `${computedPlayerPercent}%` : 0 }"></span>
       </div>
-      <div class="percentage"> {{ playerPercent }}%</div>
+      <div class="percentage"> {{ (playerPercent >=0) ? playerPercent : 0 }}%</div>
     </div>
     <div>
       <h2>Monstro</h2>
-      <div class="progreebar">
-        <span :style="{width: computedMonsterPercent}"></span>
+      <div class="progreesbar">
+        <span :class='{"critical" : menor(computedMonsterPercent) }' :style="{width: ( computedMonsterPercent >= 0) ?  `${computedMonsterPercent}%` : 0 }"></span>
       </div>
-      <div class="percentage"> {{ monsterPercent }}%</div>
+      <div class="percentage"> {{ (monsterPercent >=0) ? monsterPercent : 0 }}%</div>
     </div>
   </div>
 
@@ -51,17 +51,23 @@
       margin: 0 5px;      
     }
 
-    .players .progreebar {
+    .players .progreesbar {
      width: 100%;
      height: 20px;
      background: #ddd;
      text-align: left;
     }
-    .players .progreebar span{
+    .players .progreesbar span {
      display: inline-block;
      height: 20px;
      background: green;
     }
+
+    .players .progreesbar .critical {
+     background: red;
+    }
+
+    
 
     button {
       margin: 0 5px;  
