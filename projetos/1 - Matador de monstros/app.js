@@ -2,9 +2,14 @@ new Vue({
     el: '#app',
 	data: {
 		started: false,
+		finished: false,
 		playerPercent: 100,
-		monsterPercent: 100
-	},       
+		monsterPercent: 100,
+		playerAttack: 0,
+		monsterAttack: 0,
+		champion: '',
+		logs: []
+	},       	
     methods: {
 		init() {
 			this.started = true;
@@ -20,29 +25,37 @@ new Vue({
 		attack() {
 			const calc = ()=> Math.floor((Math.random() * 20));	
 			console.log('calc ', calc())
-			const subPlayer =  this.playerPercent -= calc();
-			const subMonster =  this.monsterPercent -= calc();
 
-			const aP = calc();
-			const aM = calc();
+			
+			const attacks = [calc(), calc()]
 
-			if(aP> aM) {
-				this.playerPercent -= aP
-				this.monsterPercent -= aM
-			} else {
-				this.playerPercent -= aM
-				this.monsterPercent -= aP
-			}
+			console.log('attacks ', attacks)
+					
+			return {
+				default: () => {
+					const player = Math.min(...attacks);
+					const monster = Math.max(...attacks);
+					this.playerPercent -= monster
+					this.monsterPercent -= player						
 
-
-			// if (subMonster < subPlayer) {
-			// 	console.log('playerA ', subPlayer );
-			// 	console.log('playerB ', subMonster );
-			// 	calc();
-			// } else {
-			// 	(subPlayer >= 0) ?  this.playerPercent = subPlayer :  this.playerPercent = 0;
-			// 	(subMonster >= 0) ?  this.monsterPercent = subMonster :  this.monsterPercent = 0;
-			// }	
+					this.logs.push({ playerAttack: player, monsterAttack: monster})
+					if(this.playerPercent <= 0) {
+						this.finished = true
+						this.champion = 'monster'
+					}
+				},
+				special: () => {
+					const player = Math.max(...attacks);
+					const monster = Math.min(...attacks);
+					this.playerPercent -= monster
+					this.monsterPercent -= player
+					this.logs.push({ playerAttack: player, monsterAttack: monster})
+					if(this.monsterPercent <= 0) {
+						this.finished = true
+						this.champion = 'player'
+					}
+				}
+			}	
 			
 		},
 		menor(progrees) {

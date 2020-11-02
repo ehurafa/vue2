@@ -21,17 +21,24 @@
     <button class="start" @click="init()">Iniciar o jogo</button>  
   </div>
 
-  <div class="actions" v-else>
-    <button class="ataque" @click="attack()">Ataque</button>
-    <button class="especial">Ataque especial</button>
+  <div class="actions" v-else-if="started && !finished">
+    <button class="ataque" @click="attack().default()">Ataque</button>
+    <button class="especial" @click="attack().special()">Ataque especial</button>
     <button class="curar">Curar</button>
     <button @click="finish()">Desistir</button>
   </div>
-
-  <div class="feedback">
-    <div class="red">Jogador atingiu monstro com 6.</div>
-    <div class="purple">Monstro atingiu jogador com 6.</div>
+  <div class="message" v-else>
+    <p v-if="champion == 'player'">Você ganhou! :)</p>
+    <p v-else class="fail">Você perdeu! :(</p>
   </div>
+
+  <template v-if="!finished">
+    <div class="feedback" v-for="log in logs">
+      <div class="red">Monstro atingiu jogador com {{ log.monsterAttack }}.</div>
+      <div class="purple">Jogador atingiu monstro com  {{ log.playerAttack }}.</div>
+    </div>
+  </template>
+ 
 </div>
 <script src="app.js"></script>
 
@@ -40,7 +47,7 @@
     font-family: Tahoma;
     text-align: center;
   }
-   .players, .actions, .feedback {
+   .players, .actions, .feedback, .message {
      display: flex;    
      flex-direction: row;
      margin-top: 20px;
@@ -67,7 +74,13 @@
      background: red;
     }
 
-    
+    .message p {
+      font-size: 30px;
+      color: green;
+    }
+    .message .fail {
+      color: red;
+    }
 
     button {
       margin: 0 5px;  
