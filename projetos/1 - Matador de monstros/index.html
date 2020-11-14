@@ -1,6 +1,9 @@
 <script src="https://unpkg.com/vue"></script>
 <div id="app">
   <div class="players">
+    <div>playerPercent {{ playerPercent }}</div>
+    <div>champion {{ champion }}</div>
+    <div>finished {{ finished }}</div>
     <div>
       <h2>Jogador</h2>
       <div class="progreesbar">
@@ -18,17 +21,17 @@
   </div>
 
   <div class="start" v-if="!started">
-    <button class="start" @click="init()">Iniciar o jogo</button>  
+    <button class="start" @click="init">Iniciar o jogo</button>  
   </div>
   <div class="start" v-if="started && finished">
-    <button class="start" @click="reset()">Iniciar novo jogo</button>  
+    <button class="start" @click="reset">Iniciar novo jogo</button>  
   </div>
 
   <div class="actions" v-if="started && !finished">
     <button class="ataque" @click="attack().default()">Ataque</button>
     <button class="especial" @click="attack().special()">Ataque especial</button>
-    <button class="curar">Curar</button>
-    <button @click="finish()">Desistir</button>
+    <button class="curar" @click="recovery">Curar</button>
+    <button @click="finish">Desistir</button>
   </div>
   <div class="message" v-if="started && finished">
     <p v-if="champion == 'player'">Você ganhou! :)</p>
@@ -37,8 +40,14 @@
 
   <template v-if="!finished">
     <div class="feedback" v-for="log in logs">
-      <div class="red">Monstro atingiu jogador com {{ log.monsterAttack }}.</div>
-      <div class="purple">Jogador atingiu monstro com  {{ log.playerAttack }}.</div>
+      <template v-if="log.playerAttack">
+        <div class="red">Monstro atingiu jogador com {{ log.monsterAttack }}.</div>
+        <div class="purple">Jogador atingiu monstro com  {{ log.playerAttack }}.</div>
+      </template>    
+      <template v-else>
+        <div class="red">Monstro atingiu jogador com {{ log.monsterAttack }}.</div>
+        <div class="green">Jogador ganhou  {{ log.playerLife }} de vida.</div>
+      </template>  
     </div>
   </template>
  
@@ -134,6 +143,9 @@
     }
     .feedback .red {
       background:red;
+    }
+    .feedback .green {
+      background:green;
     }
    
   </style>
