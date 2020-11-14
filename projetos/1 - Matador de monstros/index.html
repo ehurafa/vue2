@@ -20,14 +20,17 @@
   <div class="start" v-if="!started">
     <button class="start" @click="init()">Iniciar o jogo</button>  
   </div>
+  <div class="start" v-if="started && finished">
+    <button class="start" @click="reset()">Iniciar novo jogo</button>  
+  </div>
 
-  <div class="actions" v-else-if="started && !finished">
+  <div class="actions" v-if="started && !finished">
     <button class="ataque" @click="attack().default()">Ataque</button>
     <button class="especial" @click="attack().special()">Ataque especial</button>
     <button class="curar">Curar</button>
     <button @click="finish()">Desistir</button>
   </div>
-  <div class="message" v-else>
+  <div class="message" v-if="started && finished">
     <p v-if="champion == 'player'">Você ganhou! :)</p>
     <p v-else class="fail">Você perdeu! :(</p>
   </div>

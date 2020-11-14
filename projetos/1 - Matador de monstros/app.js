@@ -12,6 +12,7 @@ new Vue({
 	},       	
     methods: {
 		init() {
+			this.reset();
 			this.started = true;
 		},
 		finish() {
@@ -20,7 +21,9 @@ new Vue({
 		reset() {
 			this.started = false;
 			this.playerPercent = 100;
-			this.monsterPercent = 100
+			this.monsterPercent = 100;
+			this.finished = false;
+			this.logs = [];
 		},
 		attack() {
 			const calc = ()=> Math.floor((Math.random() * 20));	
