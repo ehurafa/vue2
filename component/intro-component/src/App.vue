@@ -1,9 +1,7 @@
 <template>
   <div id="app">
     <div>
-      <counter></counter>
-      <counter></counter>
-      <counter></counter>
+      <counters></counters>
     </div>
   </div>
 </template>
@@ -11,8 +9,6 @@
 <script>
 export default {
   name: 'App',
-
-  data() { }
 }
 </script>
 
