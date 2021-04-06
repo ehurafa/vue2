@@ -3,15 +3,17 @@
         <h1>Componente Usuário</h1>
         <p>Esse é um componente muito legal!</p>
         <p>O nome é <strong>{{ name }}</strong></p>
+        <p>A idade é {{ age }}</p>
         <button @click="alterName">Alterar nome</button>
         <hr>
         <div class="componentes">
             <app-usuario-info
                 :name="name"
                 :restartFn="restartName"
+                :age="age"
                 @alterNamer="name = $event"
             />
-            <app-usuario-editar />
+            <app-usuario-editar :age="age" @newAge="age = $event" />
         </div>
     </div>
 </template>
@@ -25,7 +27,8 @@ export default {
     
     data() {
         return {
-            name: 'Pedro'
+            name: 'Pedro',
+            age: 25
         }
     },
 
