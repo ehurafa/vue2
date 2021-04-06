@@ -4,6 +4,7 @@
         <p>Vários detalhes...</p>
         <p>Nome do Usuário: <strong>{{ nameInverter() }}</strong></p>
         <button @click="restartName">Reiniciar nome</button>
+        <button @click="restartFn">Reiniciar nome (callback)</button>
     </div>
 </template>
 
@@ -18,7 +19,8 @@ export default {
             //     return Array(10).fill(0).join(',')
             // },
             default: 'Anônimo'
-        }
+        },
+        restartFn: Function
     },
 
     methods: {

@@ -8,6 +8,7 @@
         <div class="componentes">
             <app-usuario-info
                 :name="name"
+                :restartFn="restartName"
                 @alterNamer="name = $event"
             />
             <app-usuario-editar />
@@ -31,6 +32,9 @@ export default {
     methods: {
         alterName() {
             this.name = 'Ana'
+        },
+        restartName() {
+            this.name = 'Pedro'
         }
     }
 }
