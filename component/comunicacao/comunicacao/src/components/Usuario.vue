@@ -13,7 +13,7 @@
                 :age="age"
                 @alterNamer="name = $event"
             />
-            <app-usuario-editar :age="age" @newAge="age = $event" />
+            <app-usuario-editar :age="age" />
         </div>
     </div>
 </template>

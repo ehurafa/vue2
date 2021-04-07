@@ -8,6 +8,7 @@
 </template>
 
 <script>
+import bus from '@/bus'
 export default {
     props: {
         age: Number
@@ -15,7 +16,8 @@ export default {
 
     methods: {
         alterAge() {
-           this.$emit('newAge', 33)
+           this.age = 33
+           bus.$emit('newAge', 33)
         }
     }
 }
