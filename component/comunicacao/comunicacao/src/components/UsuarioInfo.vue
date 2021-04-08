@@ -38,7 +38,7 @@ export default {
     },
 
     created() {
-        bus.$on('newAge', age => {
+        bus.onAlterAge( age => {
             this.age = age
         })
     }
