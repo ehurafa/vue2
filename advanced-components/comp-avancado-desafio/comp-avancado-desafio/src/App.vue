@@ -1,14 +1,14 @@
 <template>
 	<div id="app">
 		<span>
-			<button class="vermelho">Carregar Componente Vermelho</button>
-			<button class="verde">Carregar Componente Verde</button>
-			<button class="azul">Carregar Componente Azul</button>
+			<button class="vermelho" @click="open('red')">Carregar Componente Vermelho</button>
+			<button class="verde" @click="open('green')">Carregar Componente Verde</button>
+			<button class="azul" @click="open('blue')">Carregar Componente Azul</button>
 		</span>
 		
-		<Vermelho />
-		<Verde />
-		<Azul />
+		<Vermelho v-if="state.red">Conteúdo do Componente <strong>Vermelho</strong></Vermelho>
+		<Verde v-if="state.green">Conteúdo do Componente <strong>Verde</strong></Verde>
+		<Azul v-if="state.blue">Conteúdo do Componente <strong>Azul</strong></Azul>
 	</div>
 </template>
 
@@ -20,6 +20,28 @@ import Azul from './components/Azul.vue'
 export default {
 	name: 'app',
 	components: { Vermelho, Verde, Azul },
+
+	data () {
+		return {
+			state: {
+				red: false,
+				green: false,
+				blue: false
+			}
+		}
+	},
+
+	methods: {
+		resetState () {
+			this.state.red = false
+			this.state.green = false
+			this.state.blue = false
+		},
+		open(el) {
+			this.resetState()
+			this.state[el] = true
+		}
+	}
 }
 </script>
 
