@@ -21,9 +21,9 @@
 					<span><input type="checkbox" v-model="features" value="intermitente"> Intermitente</span>
 				</Rotulo>
 				<Rotulo nome="Qual produto?">
-					<span class="mr-4"><input type="radio"> Web</span>
-					<span class="mr-4"><input type="radio"> Mobile</span>
-					<span><input type="radio"> Outro</span>
+					<span class="mr-4"><input type="radio" value="web" v-model="product"> Web</span>
+					<span class="mr-4"><input type="radio" value="mobile" v-model="product"> Mobile</span>
+					<span><input type="radio" value="other" v-model="product"> Outro</span>
 				</Rotulo>
 				<Rotulo nome="Prioridade">
 					<select name="" id="">
@@ -58,7 +58,7 @@
 					</span>
 				</Rotulo>
 				<Rotulo nome="Qual produto?">
-					<span>???</span>
+					<span>{{ product }}</span>
 				</Rotulo>
 				<Rotulo nome="Prioridade">
 					<span>???</span>
@@ -83,6 +83,7 @@ export default {
 		return {
 			features: [],
 			message: '',
+			product: 'web',
 			user: {
 				email: '',
 				password: '',
