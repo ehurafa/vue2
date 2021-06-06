@@ -31,7 +31,7 @@
 					</select>
 				</Rotulo>
 				<Rotulo nome="Primeira Reclamação?">
-					<Escolha />
+					<Escolha v-model="selection" />
 				</Rotulo>
 				<hr>
 				<button>Enviar</button>
@@ -66,6 +66,12 @@
 				<Rotulo nome="Primeira Reclamação?">
 					<span>???</span>
 				</Rotulo>
+				<Rotulo nome="Primeira Reclamação?">
+					<span>???</span>
+				</Rotulo>
+				<Rotulo nome="Seleçaõ">
+					<span>{{ selection }}</span>
+				</Rotulo>
 			</div>
 		</div>
 	</div>
@@ -81,6 +87,7 @@ export default {
 
 	data() {
 		return {
+			selection: false,
 			features: [],
 			message: '',
 			product: 'web',
