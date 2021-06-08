@@ -2,7 +2,7 @@
 	<div id="app">
 		<h1>Registrar Reclamação</h1>
 		<div class="conteudo">
-			<form class="painel">
+			<form class="painel" v-if="!send">
 				<div class="cabecalho">Formulário</div>
 				<Rotulo nome="E-mail">
 					<input type="text" v-model.trim="user.email">
@@ -34,9 +34,9 @@
 					<Escolha v-model="selection" />
 				</Rotulo>
 				<hr>
-				<button>Enviar</button>
+				<button @click.prevent="onSend">Enviar</button>
 			</form>
-			<div class="painel">
+			<div class="painel" v-else>
 				<div class="cabecalho">Resultado</div>
 				<Rotulo nome="E-mail">
 					<span>{{ user.email }}</span>
@@ -101,7 +101,14 @@ export default {
 				email: '',
 				password: '',
 				age: ''
-			}
+			},
+			send: false
+		}
+	},
+
+	methods: {
+		onSend () {
+			this.send = true
 		}
 	}
 }
