@@ -3,7 +3,7 @@
 		<h1>Formulário Desafio</h1>
 		<div class="conteudo">
 		<Rotulo />
-			<form class="painel">
+			<form class="painel" v-if="!send">
 				<div class="cabecalho">Formulário</div>
 
 				<div class="field">
@@ -25,22 +25,14 @@
 					<label for="no">Não <input type="radio" id="no" value="Não" v-model="user.savedata" /></label>
 					
 				</div>
-				<!-- Exercicio 01 -->
-				<!-- Criar uma formulário de registro -->
-				<!-- Nome completo (Nome e Sobrenome) -->
-				<!-- Email -->
-				<!-- Senha -->
-				<!-- Armazenar Dados? (Sim/Não) -->
-
-				<!-- Exercicio 02 -->
-				<!-- Só mostrar o fomulário de não tiver sido submetido -->
-				<!-- Mostrar a área de Resultado apenas quando o formulário for submetido -->
-				
+				<div class="field">
+					<button @click="submit">Enviar</button>					
+				</div>
 				<!-- Exercicio 03 -->
 				<!-- Crie um componente personalizado NomeCompleto -->
 				<!-- Esse componente deve receber Nome e Sobrenome -->
 			</form>
-			<div class="painel results">
+			<div class="painel results" v-else>
 				<div class="cabecalho">Resultado</div>
 
 				<ul>
@@ -72,7 +64,29 @@ export default {
 
 	data () {
 		return {
-			user: {}
+			valid: true,
+			send: false,
+			user: {
+				full_name: '',
+				email: '',
+				password: '',
+				savedata: ''
+			}
+		}
+	},
+
+	methods: {
+		validate () {
+			for (let v in this.user) {
+				if (!(!!this.user[v])) {
+					this.valid = false
+				}
+				console.log('vvv ', this.valid)
+			}
+		},
+		submit () {
+			this.validate() 
+			this.send = this.valid
 		}
 	}
 }
