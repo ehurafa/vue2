@@ -6,10 +6,12 @@
 			<form class="painel" v-if="!send">
 				<div class="cabecalho">Formulário</div>
 
-				<div class="field">
-					<label for="full_name">Nome</label>
-					<input type="text" name="full_name" v-model="user.full_name" />
-				</div>
+				<div><FullName  @fullname="getFullName($event)" /></div>
+
+				<!-- <div class="field">
+				<label for="full_name">Nome</label>
+				<input type="text" name="full_name" v-model="user.full_name" />
+				</div> -->
 				<div class="field">
 					<label for="email">E-mail</label>
 					<input type="email" name="email" v-model="user.email" />
@@ -28,9 +30,6 @@
 				<div class="field">
 					<button @click="submit">Enviar</button>					
 				</div>
-				<!-- Exercicio 03 -->
-				<!-- Crie um componente personalizado NomeCompleto -->
-				<!-- Esse componente deve receber Nome e Sobrenome -->
 			</form>
 			<div class="painel results" v-else>
 				<div class="cabecalho">Resultado</div>
@@ -57,10 +56,10 @@
 
 <script>
 import Rotulo from './components/Rotulo.vue'
-
+import FullName from './components/FullName.vue'
 export default {
 	name: 'app',
-	components: { Rotulo },
+	components: { Rotulo, FullName },
 
 	data () {
 		return {
@@ -81,12 +80,14 @@ export default {
 				if (!(!!this.user[v])) {
 					this.valid = false
 				}
-				console.log('vvv ', this.valid)
 			}
 		},
 		submit () {
 			this.validate() 
 			this.send = this.valid
+		},
+		getFullName (fullname) {
+			this.user.full_name = fullname
 		}
 	}
 }
