@@ -6,29 +6,25 @@
 			<form class="painel" v-if="!send">
 				<div class="cabecalho">Formulário</div>
 
-				<div><FullName  @fullname="getFullName($event)" /></div>
+				<div><FullName  @fullname="getFullName($event)" v-model="full_name" /></div>
 
-				<!-- <div class="field">
-				<label for="full_name">Nome</label>
-				<input type="text" name="full_name" v-model="user.full_name" />
-				</div> -->
 				<div class="field">
 					<label for="email">E-mail</label>
-					<input type="email" name="email" v-model="user.email" />
+					<input type="email" name="email" v-model="email" />
 				</div>
 				<div class="field">
 					<label for="password">Senha</label>
-					<input type="password" name="password" v-model="user.password" />
+					<input type="password" name="password" v-model="password" />
 				</div>
 				<div class="field">
 					<label for="password">Armazenar os dados?</label>
-					<label for="yes">Sim <input type="radio" id="yes" value="Sim" v-model="user.savedata" /></label>
+					<label for="yes">Sim <input type="radio" id="yes" value="Sim" v-model="savedata" /></label>
 					
-					<label for="no">Não <input type="radio" id="no" value="Não" v-model="user.savedata" /></label>
+					<label for="no">Não <input type="radio" id="no" value="Não" v-model="savedata" /></label>
 					
 				</div>
 				<div class="field">
-					<button @click="submit">Enviar</button>					
+					<button @click.prevent="submit">Enviar</button>					
 				</div>
 			</form>
 			<div class="painel results" v-else>
@@ -36,16 +32,19 @@
 
 				<ul>
 					<li>
-						<p>Nome: {{ user.full_name }}</p>
+						<p>Nome: {{ full_name.name }}</p>
 					</li>
 					<li>
-						<p>E-mail: {{ user.email }}</p>
+						<p>Sobrenome: {{ full_name.surname }}</p>
 					</li>
 					<li>
-						<p>Senha: {{ user.password }}</p>
+						<p>E-mail: {{ email }}</p>
 					</li>
 					<li>
-						<p>Armazenar os dados?: {{ user.savedata }}</p>
+						<p>Senha: {{ password }}</p>
+					</li>
+					<li>
+						<p>Armazenar os dados?: {{ savedata }}</p>
 					</li>
 				</ul>
 
@@ -64,30 +63,23 @@ export default {
 	data () {
 		return {
 			valid: true,
-			send: false,
-			user: {
-				full_name: '',
-				email: '',
-				password: '',
-				savedata: ''
-			}
+			send: false,			
+			full_name: {
+				name: '',
+				surname: ''
+			},
+			email: '',
+			password: '',
+			savedata: true
 		}
 	},
 
 	methods: {
-		validate () {
-			for (let v in this.user) {
-				if (!(!!this.user[v])) {
-					this.valid = false
-				}
-			}
-		},
 		submit () {
-			this.validate() 
 			this.send = this.valid
 		},
-		getFullName (fullname) {
-			this.user.full_name = fullname
+		onSend () {
+			this.send = true
 		}
 	}
 }
