@@ -4,7 +4,7 @@
 		<p v-text="'Usando a diretiva v-text'"></p>
 		<p v-html="'Usando a diretiva v-html <strong>strong</strong>'"></p>
 		<hr>
-		<p v-featured>Usando uma diretiva personalizada</p>
+		<p v-featured="'blue'">Usando uma diretiva personalizada</p>
 	</div>
 </template>
 
