@@ -6,7 +6,15 @@ Vue.config.productionTip = false
 Vue.directive('featured', {
 	bind(el, binding) {
 		// el.style.backgroundColor = 'lightgreen'
-		el.style.backgroundColor = binding.value
+
+		if (binding.arg === 'bg') {
+			el.style.backgroundColor = binding.value
+		} else {
+			el.style.color = binding.value
+		}
+
+
+		
 	}
 })
 
