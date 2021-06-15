@@ -8,7 +8,7 @@
 		<p v-featured="'red'">Usando uma diretiva personalizada</p>
 
 		<p v-local-featured:bg.delay="'blue'">Usando uma diretiva personalizada</p>
-		<p v-local-featured="'red'">Usando uma diretiva personalizada</p>
+		<p v-local-featured.delay.alternate="'red'">Usando uma diretiva personalizada</p>
 	</div>
 </template>
 
@@ -17,15 +17,32 @@ export default {
 	directives: {
 		'local-featured': {
 			bind(el, binding) {
+				const applyColor = color => {
+					if (binding.arg === 'bg') {
+						el.style.backgroundColor = color
+					} else {
+						el.style.color = color
+					}
+				}
+
 				let delay = 0
 
 				if (binding.modifiers['delay']) delay = 3000
 
+				const color1 = binding.value
+
+				const color2 = 'purple'
+
+				let current = color1
+
 				setTimeout(() => {
-					if (binding.arg === 'bg') {
-						el.style.backgroundColor = binding.value
-					} else {
-						el.style.color = binding.value
+					if (binding.modifiers['alternate']) {
+						setInterval(() => {
+							current = current === color1 ? color2 : color1
+							applyColor(current)
+						}, 1000)
+					}else {
+						applyColor(binding.value)
 					}
 				}, delay)
 			}
