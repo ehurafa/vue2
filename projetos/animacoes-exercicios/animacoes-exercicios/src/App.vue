@@ -7,6 +7,10 @@
 		<transition name="fade">
 			<div class="alert show" v-if="show">{{ msg }}</div>
 		</transition>
+
+		<transition name="slide">
+			<div class="alert show" v-if="show">{{ msg }}</div>
+		</transition>
 	</div>
 </template>
 
@@ -45,5 +49,23 @@ export default {
 }
 .fade-enter-active, .fade-leave-active  {
 	transition: opacity 2s;
+}
+
+@keyframes slide-in {
+	from { transform: translateY(40px); }
+	to { transform: translateY(0); }
+}
+
+@keyframes slide-out {
+	from { transform: translateY(0); }
+	to { transform: translateY(40px); }
+}
+
+.slide-enter-active {
+	animation: slide-in 2s ease;
+}
+
+.slide-leave-active {
+	animation: slide-out 2s ease;
 }
 </style>
