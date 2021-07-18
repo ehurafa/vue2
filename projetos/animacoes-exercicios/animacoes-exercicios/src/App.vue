@@ -8,7 +8,7 @@
 			<div class="alert show" v-if="show">{{ msg }}</div>
 		</transition>
 
-		<transition name="slide">
+		<transition name="slide" type="animation">
 			<div class="alert show" v-if="show">{{ msg }}</div>
 		</transition>
 	</div>
@@ -63,9 +63,15 @@ export default {
 
 .slide-enter-active {
 	animation: slide-in 2s ease;
+	transition: opacity 2s;
 }
 
 .slide-leave-active {
 	animation: slide-out 2s ease;
+	transition: opacity 6s;
 }
+.slide-enter, .slide-leave-to {
+	opacity: 0;
+}
+
 </style>
