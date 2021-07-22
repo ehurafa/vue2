@@ -4,12 +4,19 @@
 		<hr>
 		<button @click="show = !show"> Mostrar Mensagem</button>
 
-		<transition name="fade">
+		<transition name="fade" appear>
 			<div class="alert show" v-if="show">{{ msg }}</div>
 		</transition>
 
-		<transition name="slide" type="animation">
+		<transition name="slide" type="animation" appear> 
 			<div class="alert show" v-if="show">{{ msg }}</div>
+		</transition>
+		<transition
+			name="custom-classes-transition"
+			enter-active-class="animated tada"
+			leave-active-class="animated bounceOutRight"
+		>
+			<p v-if="show">hello</p>
 		</transition>
 	</div>
 </template>
@@ -20,7 +27,7 @@ export default {
 	data () {
 		return {
 			msg: 'Uma mensagem de informação para usuário',
-			show: false
+			show: true
 		}
 	}
 }
@@ -73,5 +80,4 @@ export default {
 .slide-enter, .slide-leave-to {
 	opacity: 0;
 }
-
 </style>
