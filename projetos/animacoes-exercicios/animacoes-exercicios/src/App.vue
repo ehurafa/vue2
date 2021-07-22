@@ -23,8 +23,9 @@
 			<option value="fade">Fade</option>
 			<option value="slide">Slide</option>
 		</select>
-		<transition :name="typeAnimation"> 
-			<div class="alert show" v-if="show">{{ msg }}</div>
+		<transition :name="typeAnimation" mode="out-in">  
+			<div class="alert show" v-if="show" key="one">{{ msg }}</div>
+			<div class="alert second " else key="two">{{ msg }}</div>
 		</transition>
 	</div>
 </template>
@@ -55,9 +56,13 @@ export default {
 
 .alert {
 	margin: 10px auto;
+	background: rgb(177, 250, 255);
 }
 .alert.show {
-	background: rgb(177, 250, 255);
+	
+}
+.alert.second {
+	background: orange;
 }
 
 .fade-enter, .fade-leave-to {
