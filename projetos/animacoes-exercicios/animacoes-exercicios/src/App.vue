@@ -4,7 +4,7 @@
 		<hr>
 		<button @click="show = !show"> Mostrar Mensagem</button>
 
-		<transition name="fade" appear>
+		<!--<transition name="fade" appear>
 			<div class="alert show" v-if="show">{{ msg }}</div>
 		</transition>
 
@@ -17,6 +17,14 @@
 			leave-active-class="animated bounceOutRight"
 		>
 			<p v-if="show">hello</p>
+		</transition> -->
+		<hr />
+		<select v-model="typeAnimation">
+			<option value="fade">Fade</option>
+			<option value="slide">Slide</option>
+		</select>
+		<transition :name="typeAnimation"> 
+			<div class="alert show" v-if="show">{{ msg }}</div>
 		</transition>
 	</div>
 </template>
@@ -26,6 +34,7 @@
 export default {
 	data () {
 		return {
+			typeAnimation: 'fade',
 			msg: 'Uma mensagem de informação para usuário',
 			show: true
 		}
