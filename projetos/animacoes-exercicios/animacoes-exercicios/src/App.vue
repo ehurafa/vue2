@@ -17,7 +17,7 @@
 			leave-active-class="animated bounceOutRight"
 		>
 			<p v-if="show">hello</p>
-		</transition> -->
+		</transition> 
 		<hr />
 		<select v-model="typeAnimation">
 			<option value="fade">Fade</option>
@@ -26,6 +26,21 @@
 		<transition :name="typeAnimation" mode="out-in">  
 			<div class="alert show" v-if="show" key="one">{{ msg }}</div>
 			<div class="alert second " else key="two">{{ msg }}</div>
+		</transition> -->
+		<hr>
+		<button @click="show2 = !show2">Mostrar</button>
+		<transition
+			@before-enter="beforeEnter"
+			@enter="enter"
+			@after-enter="afterEnter"
+			@enter-cancelled="enterCancelled"
+
+			@before-leave="beforeLeave"
+			@leave="leave"
+			@after-leave="afterLeave"
+			@leave-cancelled="leaveCancelled"
+		>
+			<div v-if="show2" class="box"></div>
 		</transition>
 	</div>
 </template>
@@ -37,7 +52,36 @@ export default {
 		return {
 			typeAnimation: 'fade',
 			msg: 'Uma mensagem de informação para usuário',
-			show: true
+			show: true,
+			show2: true
+		}
+	},
+	methods: {
+		beforeEnter (el) {
+			console.log('beforeEnter', el);
+		},
+		enter (el, done) {
+			console.log('enter', el)
+			done()
+		},
+		afterEnter (el) {
+			console.log('afterEnter', el)
+		},
+		enterCancelled () {
+			console.log('enterCancelled')
+		},
+		beforeLeave (el) {
+			console.log('beforeLeave', el)
+		},
+		leave (el, done) {
+			console.log('leave', el)
+			done()
+		},
+		afterLeave (el) {
+			console.log('afterLeave', el)
+		},
+		leaveCancelled () {
+			console.log('leaveCancelled')
 		}
 	}
 }
@@ -52,6 +96,13 @@ export default {
 	color: #2c3e50;
 	margin-top: 60px;
 	font-size: 1.5rem;
+}
+
+.box {
+	width: 300px;
+	height: 100px;
+	margin: 30px auto;
+	background: lightseagreen;
 }
 
 .alert {
