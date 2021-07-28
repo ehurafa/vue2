@@ -28,8 +28,9 @@
 			<div class="alert second " else key="two">{{ msg }}</div>
 		</transition> -->
 		<hr>
-		<button @click="show2 = !show2">Mostrar</button>
+		<button @click="show2 = !show2">Alternar</button>
 		<transition
+			:css="false"
 			@before-enter="beforeEnter"
 			@enter="enter"
 			@after-enter="afterEnter"
@@ -53,16 +54,30 @@ export default {
 			typeAnimation: 'fade',
 			msg: 'Uma mensagem de informação para usuário',
 			show: true,
-			show2: true
+			show2: true,
+			baseWidth: 0
 		}
 	},
 	methods: {
+		animate (el, done, negative) {
+			let round = 1
+			const timer = setInterval(() => {
+				const newWidth = this.baseWidth +
+				(negative ? -round * 10 : round * 10)
+				el.style.width = `${newWidth}px`
+				round++
+				if (round > 30) {
+					clearInterval(timer)
+					done()
+				}
+			}, 20)
+		},
 		beforeEnter (el) {
-			console.log('beforeEnter', el);
+			this.baseWidth = 0
+			el.style.width = `${this.baseWidth}px`
 		},
 		enter (el, done) {
-			console.log('enter', el)
-			done()
+			this.animate(el, done, false)
 		},
 		afterEnter (el) {
 			console.log('afterEnter', el)
@@ -71,11 +86,11 @@ export default {
 			console.log('enterCancelled')
 		},
 		beforeLeave (el) {
-			console.log('beforeLeave', el)
+			this.baseWidth = 300
+			el.style.width = `${this.baseWidth}px`
 		},
 		leave (el, done) {
-			console.log('leave', el)
-			done()
+			this.animate(el, done, true)
 		},
 		afterLeave (el) {
 			console.log('afterLeave', el)
