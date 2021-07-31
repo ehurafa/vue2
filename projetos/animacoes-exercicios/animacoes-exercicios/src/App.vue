@@ -49,6 +49,13 @@
 		<transition name="fade" mmode="out-in">
 			<component :is="selectedComponent"></component>
 		</transition>
+		<hr/>
+		<button @click="addStudent">Adicionar aluno</button>
+		<transition-group name="slide" tag="div">
+			<ul v-for="(student, i) in students" :key="student">
+				<li @click="removeStudent(i)"> {{ student }}</li>
+			</ul>
+		</transition-group>
 	</div>
 </template>
 
@@ -60,6 +67,7 @@ export default {
 	components: { InfoAlert, WarningAlert },
 	data () {
 		return {
+			students: ['Erik', 'Daniele', 'Aline', 'Luiz'],
 			typeAnimation: 'fade',
 			msg: 'Uma mensagem de informação para usuário',
 			show: true,
@@ -69,6 +77,13 @@ export default {
 		}
 	},
 	methods: {
+		addStudent () {
+			const s = Math.random().toString(36).substring(2)
+			this.students.push(s)
+		},
+		removeStudent (index) {
+			this.students.splice(index, 1)
+		},
 		animate (el, done, negative) {
 			let round = 1
 			const timer = setInterval(() => {
@@ -164,10 +179,16 @@ export default {
 }
 
 .slide-leave-active {
+	position: absolute;
+	width: 100%;
 	animation: slide-out 2s ease;
 	transition: opacity 6s;
 }
 .slide-enter, .slide-leave-to {
 	opacity: 0;
+}
+
+.slide-move {
+	transition: transform 1s;
 }
 </style>
