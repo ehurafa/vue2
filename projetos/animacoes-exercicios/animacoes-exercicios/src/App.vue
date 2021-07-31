@@ -43,19 +43,29 @@
 		>
 			<div v-if="show2" class="box"></div>
 		</transition>
+		<hr />
+		<button @click="selectedComponent = 'InfoAlert'">Info</button>
+		<button @click="selectedComponent = 'WarningAlert'">Advertencia</button>
+		<transition name="fade" mmode="out-in">
+			<component :is="selectedComponent"></component>
+		</transition>
 	</div>
 </template>
 
 <script>
+import InfoAlert from './InfoAlert.vue'
+import WarningAlert from './WarningAlert.vue'
 
 export default {
+	components: { InfoAlert, WarningAlert },
 	data () {
 		return {
 			typeAnimation: 'fade',
 			msg: 'Uma mensagem de informação para usuário',
 			show: true,
 			show2: true,
-			baseWidth: 0
+			baseWidth: 0,
+			selectedComponent: 'InfoAlert'
 		}
 	},
 	methods: {
