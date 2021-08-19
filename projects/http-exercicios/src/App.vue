@@ -11,8 +11,17 @@
 					v-model="user.email" Placeholder="Inform o e-mail"></b-form-input>
 			</b-form-group>
 			<hr />
-			<b-button @click="save" size="lg" variant="primary">Salvar</b-button>
+			<b-button @click="save" size="lg" variant="primary" class="mr-2">Salvar</b-button>
+			<b-button @click="getUsers" size="lg" variant="success">Obter Usuários</b-button>
 		</b-card>
+		<hr/>
+		<b-list-group>
+			<b-list-group-item v-for="(user, id) in users" :key="id">
+				<strong>Nome:</strong> {{ user.name }}<br />
+				<strong>E-mail:</strong> {{ user.email }}<br />
+				<strong>ID:</strong> {{ id }}<br />
+			</b-list-group-item>
+		</b-list-group>	
 	</div>
 </template>
 
@@ -20,6 +29,7 @@
 export default {
 	data () {
 		return {
+			users: [],
 			user: {
 				name: '',
 				email: ''
@@ -32,6 +42,13 @@ export default {
 				.then(res => {
 					this.user.name = ''
 					this.user.email = ''
+				})
+		},
+		getUsers () {
+			this.$http.get('usuarios.json')
+				.then(res => {
+					this.users = res.data
+					console.log('>> ', this.users)
 				})
 		}
 	}
