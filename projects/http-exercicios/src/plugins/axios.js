@@ -17,6 +17,15 @@ Vue.use({
                 config.method = 'put'
             } */
             return config
-        })
+        }, error => Promise.reject(error))
+
+        Vue.prototype.$http.interceptors.response.use(res => {
+            /* const array = []
+            for(let key in res.data) {
+                array.push({ id: key, ...res.data[key]})
+            }
+            res.data = array */
+            return res
+        }, error => Promise.reject(error))
     }
 })
