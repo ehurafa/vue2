@@ -50,6 +50,8 @@ export default {
 					this.users = res.data
 					console.log('>> ', this.users)
 				})
+
+			this.$http.defaults.headers.common['Authorzation'] = 'abc123'
 		}
 	}
 	/* created () {
