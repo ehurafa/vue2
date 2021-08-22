@@ -19,7 +19,10 @@
 			<b-list-group-item v-for="(user, id) in users" :key="id">
 				<strong>Nome:</strong> {{ user.name }}<br />
 				<strong>E-mail:</strong> {{ user.email }}<br />
-				<strong>ID:</strong> {{ id }}<br />
+				<strong>ID:</strong> {{ id }}<br /><br />
+				<b-button variant="warning" size="lg" @click="getUser(id)">Carregar</b-button>
+				<b-button variant="danger" size="lg" @click="deleteUser(id)" class="ml-2">Excluir</b-button>
+
 			</b-list-group-item>
 		</b-list-group>	
 	</div>
@@ -30,6 +33,7 @@ export default {
 	data () {
 		return {
 			users: [],
+			id: null,
 			user: {
 				name: '',
 				email: ''
@@ -37,12 +41,20 @@ export default {
 		}
 	},
 	methods: {
+		clear () {
+			this.user.name = ''
+			this.user.email = ''
+			this.id = null
+		},
 		save () {
-			this.$http.post('usuario.json', this.user)
-				.then(res => {
-					this.user.name = ''
-					this.user.email = ''
-				})
+			const method = this.id ? 'patch' : 'post'
+			const endUrl = this.id ? `/${this.id}.json` : '.json'
+			this.$http[method](`/usuarios${endUrl}`, this.user)
+				.then(() => this.clear())
+		},
+		getUser (id) {
+			this.id = id
+			this.user = { ...this.user[id] }
 		},
 		getUsers () {
 			this.$http('https://curso-vue-96e43-default-rtdb.firebaseio.com/usuarios.json')
@@ -52,6 +64,10 @@ export default {
 				})
 
 			this.$http.defaults.headers.common['Authorzation'] = 'abc123'
+		},
+		deleteUser (id) {
+			console.log('deleteUser ', id)
+			this.$http.delete(`/usuarios/${id}.json`).then(() => this.clear())
 		}
 	}
 	/* created () {
