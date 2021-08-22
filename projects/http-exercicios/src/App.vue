@@ -1,6 +1,7 @@
 <template>
 	<div id="app" class="container">
 		<h1>HTTP com Axios</h1>
+		<b-alert show dismissible v-for="message in messages" :key="message.text" :variant="message.type">{{ message.text }}</b-alert>
 		<b-card>
 			<b-form-group label="Nome:">
 				<b-form-input type="text" size="lg"
@@ -32,6 +33,7 @@
 export default {
 	data () {
 		return {
+			messages: [],
 			users: [],
 			id: null,
 			user: {
@@ -44,13 +46,20 @@ export default {
 		clear () {
 			this.user.name = ''
 			this.user.email = ''
-			this.id = null
+			this.id = null,
+			this.messages = []
 		},
 		save () {
 			const method = this.id ? 'patch' : 'post'
 			const endUrl = this.id ? `/${this.id}.json` : '.json'
 			this.$http[method](`/usuarios${endUrl}`, this.user)
-				.then(() => this.clear())
+				.then(() => {
+					this.clear()
+					this.messages.push({
+						text: 'Operação realizada com sucesso!',
+						type: 'success'
+					})
+				})
 		},
 		getUser (id) {
 			this.id = id
@@ -67,7 +76,14 @@ export default {
 		},
 		deleteUser (id) {
 			console.log('deleteUser ', id)
-			this.$http.delete(`/usuarios/${id}.json`).then(() => this.clear())
+			this.$http.delete(`/usuarios/${id}.json`)
+				.then(() => this.clear())
+				.catch(() => {
+					this.messages.push({
+						text: 'Problema para excluir!',
+						type: 'danger'
+					})
+				})
 		}
 	}
 	/* created () {
