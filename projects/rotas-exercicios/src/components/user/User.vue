@@ -2,6 +2,7 @@
     <div class="user">
         <h2>Usuário</h2>
         <hr>
+        <p><strong>Código:</strong> {{ id }}</p>
         <button sucesso @click="goToStart">Voltar</button>
     </div>
 </template>
@@ -9,6 +10,11 @@
 <script>
 
 export default {
+    data () {
+        return {
+            id: this.$route.params.id
+        }
+    },
     methods: {
         goToStart () {
             // this.$router.push('/')

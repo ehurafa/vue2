@@ -13,7 +13,7 @@ export default new Router({
             component: Start
         },
         {
-            path: '/usuario',
+            path: '/usuario/:id',
             component: User
         }
     ]
