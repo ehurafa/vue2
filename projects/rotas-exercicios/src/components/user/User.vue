@@ -13,7 +13,8 @@ export default {
     methods: {
         goToStart () {
             // this.$router.push('/')
-            this.$router.push({ path: '/'})
+            // this.$router.push({ path: '/'})
+            this.$router.push({ name: 'inicio'})
         }
     }
 }
