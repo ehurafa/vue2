@@ -6,6 +6,9 @@
       <p><strong>Código:</strong> {{ $route.params.id  }}</p>
       <p><strong>Completo:</strong>{{ $route.query.completo ? 'Sim' : 'Não' }}</p>
       <p><strong>Lingua:</strong>{{ $route.query.lingua }}</p>
+      <div id="footer">
+        <h3>Curso vue</h3>
+      </div>
   </div>
 </template>
 
@@ -16,5 +19,9 @@ export default {
 </script>
 
 <style>
+  #footer {
+    margin-top: 1000px;
+  }
+    
 
 </style>
