@@ -11,7 +11,15 @@
 
 <script
 export default {
-  props: ['id']
+  props: ['id'],
+  beforeRouteEnter(to, from, next) {
+    console.log('dentro do componente - usuário detalhe')
+    /* next(vm => {
+      console.log('vm ', vm)
+    }) */
+    const auth = true
+    auth ? next() : next(false)
+  }
 }
 </script>
 
