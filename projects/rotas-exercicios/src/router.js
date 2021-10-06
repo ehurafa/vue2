@@ -1,14 +1,19 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Start from './components/Start'
-import User from './components/user/User'
+/* import User from './components/user/User'
 import ListUser from './components/user/ListUser'
 import UserDetail from './components/user/UserDetail'
-import UserEdit from './components/user/UserEdit'
+import UserEdit from './components/user/UserEdit' */
 import Menu from './components/template/Menu'
 import MenuAlt from './components/template/MenuAlt'
 
 Vue.use(Router)
+
+const User = () => import(/* webpackChunkName: "user" */'./components/user/User')
+const ListUser = () => import(/* webpackChunkName: "user" */'./components/user/ListUser')
+const UserDetail = () => import('./components/user/UserDetail')
+const UserEdit = () => import('./components/user/UserEdit')
 
 const router = new Router({
     mode: 'history',
