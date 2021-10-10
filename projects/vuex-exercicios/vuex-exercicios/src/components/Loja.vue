@@ -31,6 +31,7 @@ export default {
             this.sequencia++
             // eslint-disable-next-line
             console.log(produto)
+            this.$store.state.products.push(produto)
         }
     }
 }
