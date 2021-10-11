@@ -9,14 +9,17 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
     computed: {
-        total() {
+        /* total() {
             return this.$store.getters.amount
-        },
-        products () {
-            return this.$store.state.products
-        }
+        } */
+        //...mapGetters(['amount'])
+        ...mapGetters({
+            total: 'amount'
+        })
     }
 }
 </script>
