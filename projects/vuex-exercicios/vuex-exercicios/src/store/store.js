@@ -10,5 +10,11 @@ export default new Vuex.Store({
             { nome: 'Produto 2', quantidade: 10, preco: 22.99 },
             { nome: 'Produto 3', quantidade: 1, preco: 43.18 },
         ]
+    },
+    getters: {
+        amount (state) {
+            return state.products.map(p => p.quantidade * p.preco)
+                .reduce((total, atual) => total + atual, 0)
+        }
     }
 })
