@@ -42,6 +42,9 @@ export default {
             //this.$store.commit('addProduct', produto)
             // this.addProduct(produto)
             this.$store.dispatch('addProduct', produto)
+
+            console.log(this.$store.getters.getName)
+            console.log(this.$store.getters.getFullName)
         }
     }
 }
