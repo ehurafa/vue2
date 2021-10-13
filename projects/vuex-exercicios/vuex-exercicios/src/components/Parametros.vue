@@ -18,7 +18,7 @@ export default {
     computed: {
         quantidade: {
             get () {
-                return this.$store.state.quantidade
+                return this.$store.state.parameters.quantidade
             },
             set (value) {
                 return this.$store.commit('setQuantify', value)
@@ -26,7 +26,7 @@ export default {
         },
         preco: {
             get () {
-                return this.$store.state.preco
+                return this.$store.state.parameters.preco
             },
             set (value) {
                 return this.$store.commit('setPrice', value)
