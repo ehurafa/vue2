@@ -46,6 +46,11 @@ export default {
             console.log(this.$store.getters.getName)
             console.log(this.$store.getters.getFullName)
         }
+    },
+
+    mounted () {
+        console.log('this.$store. ', this.$store)
+        console.log('2 ', this.$store.state.parameters.preco)
     }
 }
 </script>
