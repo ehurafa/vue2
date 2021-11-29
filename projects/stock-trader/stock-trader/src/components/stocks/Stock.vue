@@ -7,8 +7,9 @@
     </v-card>
     <v-card>
       <v-container fill-height>
-        <v-text-field label="Quantidade" type="number" v-model.number="quantify"></v-text-field>
-        <v-btn class="green darken-3 white--text" :disabled="quantify <= 0 || !Number.isInteger(quantify)" @click="buyStock">Comprar</v-btn>
+        <v-text-field label="Quantidade" type="number" 
+        :error="insufficientFunds" v-model.number="quantify"></v-text-field>
+        <v-btn class="green darken-3 white--text" :disabled="insufficientFunds || quantify <= 0 || !Number.isInteger(quantify)" @click="buyStock">{{ insufficientFunds ? 'Infuficiente' : 'Comprar' }}</v-btn>
       </v-container>
     </v-card>
   </v-flex>
@@ -19,6 +20,14 @@ export default {
   data () {
     return {
       quantify: 0
+    }
+  },
+  computed: {
+    funds () {
+      return this.$store.getters.funds
+    },
+    insufficientFunds () {
+      return this.quantify * this.stock.price > this.funds
     }
   },
   methods: {

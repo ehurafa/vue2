@@ -11,7 +11,7 @@
     <v-card>
       <v-container fill-height>
         <v-text-field label="Quantidade" type="number" v-model.number="quantify"></v-text-field>
-        <v-btn class="blue darken-3 white--text" :disabled="quantify <= 0 || !Number.isInteger(quantify)" @click="sellStock">Vender</v-btn>
+        <v-btn class="blue darken-3 white--text" :disabled="insufficientQuantify || quantify <= 0 || !Number.isInteger(quantify)" @click="sellStock">{{ insufficientQuantify ? 'Insuficiente' : 'Vender' }}</v-btn>
       </v-container>
     </v-card>
   </v-flex>
@@ -23,6 +23,11 @@ export default {
   data () {
     return {
       quantify: 0
+    }
+  },
+  computed: {
+    insufficientQuantify () {
+      return this.quantify > this.stock.quantify
     }
   },
   methods: {
