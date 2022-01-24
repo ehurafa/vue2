@@ -35,8 +35,9 @@ export default {
       const order = {
         stockId: this.stock.id,
         stockPrice: this.stock.price,
-        quantidade: this.quantify
+        quantify: this.quantify
       }
+      console.log('order ', order)
       this.$store.dispatch('buyStock', order)
       this.quantify = 0
     }
