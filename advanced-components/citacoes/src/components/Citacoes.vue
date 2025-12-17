@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import Citacao from './Citacoes.vue'
+import Citacao from './Citacao.vue'
 export default {
     components: { Citacao },
     data() {
