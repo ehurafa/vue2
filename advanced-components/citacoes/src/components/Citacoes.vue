@@ -1,3 +1,4 @@
+<!-- eslint-disable -->
 <template>
     <div class="citacoes">
         <span>
@@ -41,11 +42,9 @@ export default {
     },
 
     activated () {
-        console.log('activated')
     },
 
     deactivated () {
-        console.log('deactivated')
     }
 }
 </script>
